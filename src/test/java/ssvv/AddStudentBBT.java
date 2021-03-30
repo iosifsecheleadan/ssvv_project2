@@ -12,7 +12,7 @@ import ssvv.validation.TemaValidator;
 import java.io.File;
 import java.io.FileWriter;
 
-public class AddStudentTest {
+public class AddStudentBBT {
     Service service;
     String filenameStudent = "fisiere/testStudenti.xml";
     String filenameTema = "fisiere/testTeme.xml";
