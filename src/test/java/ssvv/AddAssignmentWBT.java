@@ -46,7 +46,6 @@ public class AddAssignmentWBT {
         } catch (Exception e) {
         }
 
-
         StudentXMLRepo studentXMLRepository = new StudentXMLRepo(filenameStudent);
         TemaXMLRepo temaXMLRepository = new TemaXMLRepo(filenameTema);
         NotaValidator notaValidator = new NotaValidator(studentXMLRepository, temaXMLRepository);
@@ -89,4 +88,69 @@ public class AddAssignmentWBT {
 
     }
 
+    @Test
+    public void testAddWithId() {
+        try {
+            service.addTema(new Tema("", "descriere", 3, 3));
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void testAddWithDescriere() {
+        try {
+            service.addTema(new Tema("id", "", 3, 3));
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void testAddWithDeadline() {
+        Tema tema = service.addTema(new Tema("id", "descriere", 1, 3));
+        assert(tema == null);
+
+        try {
+            service.addTema(new Tema("id1", "descriere", 0, 3));
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+
+        tema = service.addTema(new Tema("id2", "descriere", 14, 3));
+        assert(tema == null);
+
+        try {
+            service.addTema(new Tema("id3", "descriere", 15, 3));
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
+
+    @Test
+    public void testAddWithPrimire() {
+        Tema tema = service.addTema(new Tema("id", "descriere", 3,1));
+        assert(tema == null);
+
+        try {
+            service.addTema(new Tema("id1", "descriere", 3, 0));
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+
+        tema = service.addTema(new Tema("id2", "descriere",  3,14));
+        assert (tema == null);
+
+        try {
+            service.addTema(new Tema("id3", "descriere",  3,15));
+            assert(false);
+        } catch (Exception e) {
+            assert(true);
+        }
+    }
 }
