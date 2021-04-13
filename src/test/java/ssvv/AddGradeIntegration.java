@@ -95,6 +95,12 @@ public class AddGradeIntegration {
     }
 
     @Test
+    public void incrementalIntegration() {
+        addStudent();
+        addAssignment();
+    }
+
+    @Test
     public void bigBangIntegration() {
         addStudent();
         addAssignment();
